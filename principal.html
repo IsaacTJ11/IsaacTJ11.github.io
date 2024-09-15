@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <style>
+        
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        :root{
+            --naranja: #F65800;
+            --lightNaranja: #FA8B00;
+            --azul: #00A1F4;
+            --lightAzul: #00F5FA;
+            --blanco: #FFFFFF;
+            --negro: #000000;
+
+        }
+
+        body{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: var(--negro);
+        }
+
+        .logo{
+            width: 300px;
+            position: absolute;
+            top: 0px;
+            right: 30px;
+            padding: 10px;
+        }
+
+        h1{
+            margin-top: 200px;
+            color: var(--naranja);
+            text-align: center;
+        }
+
+        form{
+            width: 400px;
+            margin: 45px auto;
+            text-align: center;
+        }
+        
+        form input[type="text"]{
+            background-color: var(--negro);
+            color: var(--naranja);
+            border-style: none;
+            font-size: 1.5em;
+
+        }
+
+        form input[type="text"]::placeholder{
+            color: var(--blanco);
+        }
+
+        form input[type="text"]:focus{
+            outline: none;
+        }
+
+        form input[type="submit"]{
+            font-size: 2em;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-style: none;
+            color: var(--naranja);
+        }
+
+        form input[type="submit"]:hover{
+            background-color: var(--naranja);
+            cursor: pointer;
+            color: var(--blanco);
+        }
+        .contenedorCentral{
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .contenedorLista{
+            background-color: var(--naranja);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding: 16px;
+            border-radius: 4px;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--blanco);
+        }
+
+        .btnElminar{
+            width: 20px;
+            height: 20px;
+        }
+
+        .btnElminar:hover{
+            cursor: pointer;
+        }
+
+    </style>
+
+    <head>
+        
+        <meta charset="UTF-8">
+        <title>Red de Control Room</title>
+
+    </head>
+
+    <body>
+        
+        <img src="images/Logo Orygen Blanco.png" alt="Logo" class="logo">
+
+        <h1>Control Room</h1>
+        
+        <form action="#" id="userInput">
+
+            <input type="text" placeholder="Nombre de la Central..." autofocus>
+            <input type="submit" value="+" id="btnAgregar">
+
+        </form>
+        
+        
+        <div id="central" class="contenedorCentral">
+<!--
+            <div class="contenedorLista" id="1">
+
+                <label>Chimay</label>
+                <img src="images/trash blanco.png" class="btnElminar">
+
+            </div>
+-->
+        </div>
+        
+
+    </body>
+
+    <script>
+
+    let contadorCentral=0;
+    const nombreCentral=document.querySelector('input[type="text"]');
+
+    userInput.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        agregarCentral();
+    });
+
+    let agregarCentral = ()=>{
+
+        contadorCentral++;
+        
+        let nuevaCentral = nombreCentral.value;
+
+        central.innerHTML += `
+        <div class="contenedorLista" id="${contadorCentral}">
+
+            <label>
+            
+                ${nuevaCentral}
+            
+            </label>
+
+            <img src="images/trash blanco.png" class="btnElminar">
+        
+        </div>`
+
+        nombreCentral.value='';
+
+    };
+
+    central.addEventListener('click', (event)=>{
+
+        if(event.srcElement.nodeName == 'IMG'){
+            eliminarCentral(event.srcElement.parentNode.id);
+        }
+
+    });
+
+    let eliminarCentral=((id)=>{
+
+        let idCentral = document.getElementById(id);
+
+        central.removeChild(idCentral);
+
+    });
+
+    </script>
+
+</html>
